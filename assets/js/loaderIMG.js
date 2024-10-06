@@ -80,6 +80,7 @@ function countdown_() {
         document.getElementById("lose").style.display = "initial";
         document.getElementById("play").style.display = "none";
         document.querySelector('.menugame').style.top = '0';
+        document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
     time --;
@@ -91,7 +92,7 @@ function countdown_() {
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
         // play_out
-        time = 11;
+        time = 12;
         countdown_();
         const menugame = document.querySelector('.menugame');
         menugame.style.top = '-100vh';
