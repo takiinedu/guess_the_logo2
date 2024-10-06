@@ -5,10 +5,10 @@
 }
 body {
     background: linear-gradient(to left, #153A8B, #241C57);
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    min-width: 400px;
     transform-style: preserve-3d;
+    overflow: hidden;
 }
 /* contianer */
 .container{
@@ -34,6 +34,7 @@ body {
     perspective: 1000px;
     -webkit-perspective: 1000px;
     height: 450px;
+    cursor: pointer;
 }
 .frames{
     margin: auto;
@@ -42,7 +43,7 @@ body {
     height: 352.5px;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
-    transition: 1s;
+    transition: 2s;
 }
 .frame-font{
     background: linear-gradient(#dbbfa9 0 0) padding-box, linear-gradient(45deg, #002aff, #ff0008) border-box;
@@ -141,7 +142,7 @@ body {
 #play{
     width: 50vw;
     height: 10vw;
-    padding: 45px 60px 65px 50px;
+    padding-bottom: 10px;
     background-image: url(../img/play.png);
     background-size: cover;
     display: initial;
@@ -149,7 +150,6 @@ body {
 #lose{
     width: 50vw;
     height: 10vw;
-    padding: 45px 60px 50px 50px;
     background-image: url(../img/lose.png);
     background-size: cover;
     display: none;
@@ -157,7 +157,6 @@ body {
 #win{
     width: 50vw;
     height: 10vw;
-    padding: 45px 60px 65px 50px;
     background-image: url(../img/win.png);
     background-size: cover;
     display: none;

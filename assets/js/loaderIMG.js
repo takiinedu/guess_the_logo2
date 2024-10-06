@@ -30,7 +30,6 @@ let index_array = [0];
 for (let i = 0; i < number_of_logos; i++) {
     index_array[i] = i;
 }
-console.log(index_array)
 // comme on web 
 let url = "";
 let name = "";
@@ -54,14 +53,10 @@ listAll(imagesRef)
         let random = Math.floor(Math.random() * index_array.length) - 1;
         let index = index_array[random];
         index_array.splice(random, 1);
-        console.log("index =", index);
-        console.log(index_array);
         if (index < items.length) {
             const item = items[index];
             url = item.url;
             name = item.name;
-            console.log("url =", url);
-            console.log("name =", name);
             img_truoc.src = url;
         }
     })
@@ -73,6 +68,7 @@ const play_btn = document.getElementById("play");
 let can_click_play = false;
 setTimeout(function () {
     can_click_play = true;
+    document.getElementById("play").style.cursor = "pointer";
 }, 2000);
 // 
 let time = 10;
@@ -88,11 +84,10 @@ let time = 10;
 //         countdown_();
 //     }, 1000);
 // }
-// 
+
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
         // play_out
-        console.log("play");
         // time = 11;
         // countdown_();
         const menugame = document.querySelector('.menugame');
@@ -123,6 +118,7 @@ card.addEventListener("click", () => {
         // 
         if (rotateY == 0) {
             rotateY = 180;
+            img_truoc.src = url;
         } else {
             rotateY = 0;
         }
@@ -166,8 +162,6 @@ card.addEventListener("click", () => {
                     let random = Math.floor(Math.random() * index_array.length) - 1;
                     let index = index_array[random];
                     index_array.splice(random, 1);
-                    console.log("index =", index);
-                    console.log(index_array);
                     if (index < items.length) {
                         const item = items[index];
                         url = item.url;
@@ -195,9 +189,9 @@ card.addEventListener("click", () => {
                 countdown.style.width = '0';
             }, 200);
             mat = 1;
-            img_sau.src = url;
-            name_sau.innerHTML = name;
             setTimeout(function () {
+                img_sau.src = url;
+                name_sau.innerHTML = name;
                 can_click_play = true;
             }, 2000);
         }
