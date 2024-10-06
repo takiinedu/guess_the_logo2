@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container" popver>
+        <h1 class="title">Guess the logo</h1>
+        <div id="countdown-bar" class="countdown-bar">
+            <div id="countdown" class="countdown"></div>
+            <div class="lines">
+                <div class="line"></div>        <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="frames">
+                <div class="frame-font">
+                    <img class="frames__img" id="frame-font__img" src="assets/img/placehoder.png" alt="logo">
+                    <label class="frames__title" id="frame-font__title">_____</label>
+                </div>
+                <div class="frame-back">
+                    <img class="frames__img" id="frame-back__img" src="assets/img/placehoder.png" alt="logo">
+                    <div>
+                        <label class="frames__title" id="frame-back__title">_____</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menugame">
+        <div id="play" onclick="play_()"></div>
+        <div id="lose"></div>
+        <div id="win"></div>
+    </div>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/loaderIMG.js"></script>
+</body>
+</html>
