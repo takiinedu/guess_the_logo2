@@ -73,6 +73,9 @@ setTimeout(function () {
 // 
 let time = 10;
 function countdown_() {
+    if  (time == -1) {
+        return;
+    }
     if (time == 0) {
         document.getElementById("lose").style.display = "initial";
         document.getElementById("play").style.display = "none";
@@ -125,6 +128,7 @@ card.addEventListener("click", () => {
         document.querySelector('.frames').style.transform = 'rotateY(' + rotateY + 'deg)';
         // 
         if (mat == 1) {
+            time = -1;
             mat = 2;
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => {
@@ -177,6 +181,8 @@ card.addEventListener("click", () => {
                     console.error("Error listing images:", error);
                 });
         }else{
+            time = 11;
+            countdown_();
             can_click_play = false;
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => {
