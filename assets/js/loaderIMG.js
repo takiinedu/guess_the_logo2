@@ -72,24 +72,24 @@ setTimeout(function () {
 }, 2000);
 // 
 let time = 10;
-// function countdown_() {
-//     if (time == 0) {
-//         document.getElementById("lose").style.display = "initial";
-//         document.getElementById("play").style.display = "none";
-//         document.querySelector('.menugame').style.top = '0';
-//         return;
-//     }
-//     time --;
-//     setTimeout(function () {
-//         countdown_();
-//     }, 1000);
-// }
+function countdown_() {
+    if (time == 0) {
+        document.getElementById("lose").style.display = "initial";
+        document.getElementById("play").style.display = "none";
+        document.querySelector('.menugame').style.top = '0';
+        return;
+    }
+    time --;
+    setTimeout(function () {
+        countdown_();
+    }, 1000);
+}
 
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
         // play_out
-        // time = 11;
-        // countdown_();
+        time = 11;
+        countdown_();
         const menugame = document.querySelector('.menugame');
         menugame.style.top = '-100vh';
         setTimeout(() => {
