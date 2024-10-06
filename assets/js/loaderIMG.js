@@ -1,10 +1,8 @@
 console.log("connect index.js to index.html success");
 
-// Import các hàm cần thiết từ SDK Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { getStorage, ref, listAll, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js";
 
-// Cấu hình Firebase của ứng dụng web
 const firebaseConfig = {
     apiKey: "AIzaSyDjds91lHLZ0x2KI71oHc0rZgbxhE2JBn4",
     authDomain: "logo-b3804.firebaseapp.com",
@@ -15,7 +13,6 @@ const firebaseConfig = {
     measurementId: "G-HNKT0PE0QQ"
 };
 
-// Khởi tạo Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 const imagesRef = ref(storage, 'images/');
@@ -26,182 +23,138 @@ const name_truoc = document.getElementById("frame-font__title");
 const name_sau = document.getElementById("frame-back__title");
 
 let number_of_logos = 60;
-let index_array = [0];
-for (let i = 0; i < number_of_logos; i++) {
-    index_array[i] = i;
-}
-// comme on web 
+let index_array = Array.from({ length: number_of_logos }, (_, i) => i);
+
 let url = "";
 let name = "";
-listAll(imagesRef)
-    .then((res) => {
-        const promises = res.items.map((itemRef) => {
-            return getDownloadURL(itemRef).then((url) => {
-                const name_img = itemRef.name;
-                const nameWithoutExtension = name_img.replace(/\.[^/.]+$/, "");
-                return { name: nameWithoutExtension, url: url };
-            });
-        });
 
-        return Promise.all(promises);
-    })
-    .then((items) => {
-        // Sắp xếp các mục theo tên
-        items.sort((a, b) => a.name.localeCompare(b.name));
-
-        // Lấy một chỉ số ngẫu nhiên khác với chỉ số trước đó
-        let random = Math.floor(Math.random() * index_array.length) - 1;
-        let index = index_array[random];
-        index_array.splice(random, 1);
-        if (index < items.length) {
-            const item = items[index];
-            url = item.url;
-            name = item.name;
-            img_truoc.src = url;
-        }
-    })
-    .catch((error) => {
+const fetchImages = async () => {
+    try {
+        const res = await listAll(imagesRef);
+        const items = await Promise.all(res.items.map(async (itemRef) => {
+            const url = await getDownloadURL(itemRef);
+            const nameWithoutExtension = itemRef.name.replace(/\.[^/.]+$/, "");
+            return { name: nameWithoutExtension, url };
+        }));
+        return items.sort((a, b) => a.name.localeCompare(b.name));
+    } catch (error) {
         console.error("Error listing images:", error);
-    });
+    }
+};
+
+const updateImage = (items) => {
+    let random = Math.floor(Math.random() * index_array.length);
+    let index = index_array.splice(random, 1)[0];
+    if (index < items.length) {
+        const item = items[index];
+        url = item.url;
+        name = item.name;
+        img_truoc.src = url;
+    }
+};
+
+fetchImages().then(updateImage);
+
 const countdown = document.getElementById("countdown");
 const play_btn = document.getElementById("play");
 let can_click_play = false;
-setTimeout(function () {
+
+setTimeout(() => {
     can_click_play = true;
-    document.getElementById("play").style.cursor = "pointer";
+    play_btn.style.cursor = "pointer";
 }, 2000);
-// 
+
 let time = 10;
-function countdown_() {
-    if  (time == -1) {
-        return;
-    }
-    if (time == 0) {
+
+const countdown_ = () => {
+    if (time === -1) return;
+    if (time === 0) {
         document.getElementById("lose").style.display = "initial";
-        document.getElementById("play").style.display = "none";
+        play_btn.style.display = "none";
         document.querySelector('.menugame').style.top = '0';
         document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
-    time --;
-    setTimeout(function () {
-        countdown_();
-    }, 1000);
-}
+    time--;
+    setTimeout(countdown_, 1000);
+};
 
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
-        // play_out
         time = 12;
         countdown_();
-        const menugame = document.querySelector('.menugame');
-        menugame.style.top = '-100vh';
+        document.querySelector('.menugame').style.top = '-100vh';
         setTimeout(() => {
-            const container = document.querySelector('.container');
-            container.style.top = '50%';
+            document.querySelector('.container').style.top = '50%';
         }, 100);
-        // 
         img_sau.src = url;
         name_sau.innerHTML = name;
-        setTimeout(function () {
+        setTimeout(() => {
             countdown.style.transition = 'all 10s linear';
-            countdown.style.backgroundColor = 'rgb(255, 0, 0)'
+            countdown.style.backgroundColor = 'rgb(255, 0, 0)';
             countdown.style.width = '0';
         }, 1300);
     }
 });
+
 let rotateY = 0;
 let mat = 1;
-function card_clicked() {
-    document.querySelector('.frames').style.transform = 'rotateY(' + rotateY + 'deg)';
-}
+
 const card = document.querySelector('.card');
-card.addEventListener("click", () => {
+card.addEventListener("click", async () => {
     if (can_click_play) {
         can_click_play = false;
-        // 
-        if (rotateY == 0) {
-            rotateY = 180;
-            img_truoc.src = url;
-        } else {
-            rotateY = 0;
+        rotateY = rotateY === 0 ? 180 : 360;
+        document.querySelector('.frames').style.transform = `rotateY(${rotateY}deg)`;
+        if (rotateY === 360) {
+            setTimeout(() => {
+                rotateY = 0;
+                document.querySelector('.frames').style.transition = '0s';
+                document.querySelector('.frames').style.transform = `rotateY(${rotateY}deg)`;
+            }, 2500);
+            setTimeout(() => {
+                document.querySelector('.frames').style.transition = '1s';
+            }, 2550);
         }
-        document.querySelector('.frames').style.transform = 'rotateY(' + rotateY + 'deg)';
-        // 
-        if (mat == 1) {
+        if (mat === 1) {
             time = -1;
             mat = 2;
             countdown.style.transition = 'all 0s linear';
-            setTimeout(() => {
-                countdown.style.width = '100%';
-            }, 100);
-            setTimeout(() => {
-                countdown.style.backgroundColor = 'rgb(225, 255, 0)'
-            }, 200);
+            setTimeout(() => countdown.style.width = '100%', 100);
+            setTimeout(() => countdown.style.backgroundColor = 'rgb(225, 255, 0)', 200);
             setTimeout(() => {
                 countdown.style.transition = 'all 2s linear';
                 countdown.style.width = '0';
             }, 300);
             setTimeout(() => {
                 countdown.style.transition = 'all 0s linear';
-                countdown.style.backgroundColor = 'rgb(0, 229, 255)'
+                countdown.style.backgroundColor = 'rgb(0, 229, 255)';
             }, 3000);
-            // 
-            listAll(imagesRef)
-                .then((res) => {
-                    const promises = res.items.map((itemRef) => {
-                        return getDownloadURL(itemRef).then((url) => {
-                            const name_img = itemRef.name;
-                            const nameWithoutExtension = name_img.replace(/\.[^/.]+$/, "");
-                            return { name: nameWithoutExtension, url: url };
-                        });
-                    });
-
-                    return Promise.all(promises);
-                })
-                .then((items) => {
-                    // Sắp xếp các mục theo tên
-                    items.sort((a, b) => a.name.localeCompare(b.name));
-
-                    // Lấy một chỉ số ngẫu nhiên khác với chỉ số trước đó
-                    let random = Math.floor(Math.random() * index_array.length) - 1;
-                    let index = index_array[random];
-                    index_array.splice(random, 1);
-                    if (index < items.length) {
-                        const item = items[index];
-                        url = item.url;
-                        name = item.name;
-                        countdown.style.backgroundColor = 'rgb(225, 255, 0)'
-                        setTimeout(function () {
-                            img_truoc.src = url;
-                            can_click_play = true;
-                        }, 2000);
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error listing images:", error);
-                });
-        }else{
+            const items = await fetchImages();
+            updateImage(items);
+            setTimeout(() => {
+                img_truoc.src = url;
+                can_click_play = true;
+            }, 2000);
+        } else {
             time = 11;
             countdown_();
-            can_click_play = false;
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => {
                 countdown.style.width = '100%';
-                countdown.style.backgroundColor = 'rgb(0, 229, 255)'
+                countdown.style.backgroundColor = 'rgb(0, 229, 255)';
             }, 100);
             setTimeout(() => {
                 countdown.style.transition = 'all 10s linear';
-                countdown.style.backgroundColor = 'rgb(255, 0, 0)'
+                countdown.style.backgroundColor = 'rgb(255, 0, 0)';
                 countdown.style.width = '0';
             }, 200);
-            mat = 1;
-            setTimeout(function () {
+            setTimeout(() => {
+                mat = 1;
                 img_sau.src = url;
                 name_sau.innerHTML = name;
                 can_click_play = true;
-            }, 2000);
+            }, 3000);
         }
     }
 });
-let check = 0

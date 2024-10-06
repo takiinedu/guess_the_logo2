@@ -36,6 +36,12 @@ body {
     height: 450px;
     cursor: pointer;
 }
+.card img{
+    pointer-events: none;
+}
+.card label{
+    user-select: none;
+}
 .frames{
     margin: auto;
     position: relative;
