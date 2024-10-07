@@ -43,7 +43,7 @@ const fetchImages = async () => {
 };
 
 const updateImage = (items) => {
-    let random = Math.floor(Math.random() * index_array.length);
+    let random = Math.floor(Math.random() * index_array.length) - 1;
     let index = index_array.splice(random, 1)[0];
     if (index < items.length) {
         const item = items[index];
