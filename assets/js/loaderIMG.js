@@ -43,8 +43,9 @@ const fetchImages = async () => {
 };
 
 const updateImage = (items) => {
-    let random = Math.floor(Math.random() * index_array.length) - 1;
-    let index = index_array.splice(random, 1)[0];
+    let random = Math.floor(Math.random() * index_array.length);
+    let index = index_array[random];
+    const removed = index_array.splice(random, 1);
     if (index < items.length) {
         const item = items[index];
         url = item.url;
@@ -153,6 +154,8 @@ card.addEventListener("click", async () => {
                 mat = 1;
                 img_sau.src = url;
                 name_sau.innerHTML = name;
+            }, 300);
+            setTimeout(() => {
                 can_click_play = true;
             }, 3000);
         }
