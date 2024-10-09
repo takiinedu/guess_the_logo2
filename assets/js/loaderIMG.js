@@ -43,7 +43,8 @@ const fetchImages = async () => {
 };
 
 const updateImage = (items) => {
-    let random = Math.floor(Math.random() * index_array.length);
+    let random = Math.floor(Math.random() * 3);
+    console.log(random);
     let index = index_array[random];
     const removed = index_array.splice(random, 1);
     if (index < items.length) {
@@ -82,6 +83,7 @@ const countdown_ = () => {
 
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
+        can_click_play = false;
         time = 12;
         countdown_();
         document.querySelector('.menugame').style.top = '-100vh';
@@ -95,6 +97,10 @@ play_btn.addEventListener("click", () => {
             countdown.style.backgroundColor = 'rgb(255, 0, 0)';
             countdown.style.width = '0';
         }, 1300);
+        setTimeout(() => {
+            img_truoc.src = url;
+            can_click_play = true;
+        }, 3300);
     }
 });
 
