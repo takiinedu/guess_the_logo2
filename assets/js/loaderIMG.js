@@ -101,6 +101,15 @@ play_btn.addEventListener("click", () => {
 let rotateY = 0;
 let mat = 1;
 
+// guessed
+const length = number_of_logos.length;
+function guessed_() {
+    const guessed = number_of_logos - index_array.length;
+    console.log(guessed * 100 / number_of_logos);
+    document.querySelector('.progress__length').style.width = `${guessed * 100 / number_of_logos}%`;
+}
+
+
 const card = document.querySelector('.card');
 card.addEventListener("click", async () => {
     if (can_click_play) {
@@ -118,6 +127,7 @@ card.addEventListener("click", async () => {
             }, 2550);
         }
         if (mat === 1) {
+            guessed_();
             time = -1;
             mat = 2;
             countdown.style.transition = 'all 0s linear';
@@ -154,7 +164,7 @@ card.addEventListener("click", async () => {
                 mat = 1;
                 img_sau.src = url;
                 name_sau.innerHTML = name;
-            }, 300);
+            }, 1000);
             setTimeout(() => {
                 can_click_play = true;
             }, 3000);
