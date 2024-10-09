@@ -184,9 +184,10 @@
     ;
 }
 
-/* progress */
-.progress {
+/* progress && integral*/
+.progress{
     margin: auto;
+    margin-bottom: 15px;
     width: 100%;
     max-width: 500px;
     height: 10px;
@@ -197,13 +198,13 @@
 }
 
 @media screen and (max-width: 600px) {
-    .progress {
+    .progress{
         width: 80%;
     }
 
 }
 
-.progress__length {
+.progress__length{
     width: 0%;
     height: 100%;
     background-color: #FEFF42;
@@ -220,7 +221,51 @@
     transform: translate(9.5px, -2px);
 
 }
+/* inergral */
+.integral{
+    margin: auto;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 500px;
+    height: 10px;
+    background-color: #333333;
+    /* border-radius: 50px; */
+    border: #b7d1c8 solid 2px;
+    border-radius: 20px;
+}
+@media screen and (max-width: 600px) {
+    .integral{
+        width: 80%;
+    }
 
+}
+.integral__length{
+    width: 0%;
+    height: 100%;
+    background-color: #b7d1c8;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: all 1s linear;
+}
+
+.integral__length img {
+    width: 28px;
+    position: absolute;
+    right: 0;
+    transform: translate(13px, -2px);
+
+}
+/* img__shield */
+.img__shield{
+    position: absolute;
+    translate: -50% -50%;
+    top: 50%;
+    left: 50%;
+    width: 10%;
+    display: none;
+    transition: 1s;
+}
 /* menugame */
 .menugame {
     z-index: 2;

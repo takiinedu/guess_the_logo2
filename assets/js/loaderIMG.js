@@ -43,7 +43,7 @@ const fetchImages = async () => {
 };
 
 const updateImage = (items) => {
-    let random = Math.floor(Math.random() * 3);
+    let random = Math.floor(Math.random() * (index_array.length + 1));
     console.log(random);
     let index = index_array[random];
     const removed = index_array.splice(random, 1);
@@ -66,16 +66,49 @@ setTimeout(() => {
     play_btn.style.cursor = "pointer";
 }, 2000);
 
+// guessed
+const length = number_of_logos.length;
+function guessed_() {
+    const guessed = number_of_logos - index_array.length;
+    document.querySelector('.progress__length').style.width = `${guessed * 100 / number_of_logos}%`;
+}
+// // integral
+let integral = 0;
+function integral_() {
+    if (integral < 10) {
+        integral++;
+    }
+    document.querySelector('.integral__length').style.width = `${integral * 10}%`;
+}
 let time = 10;
 
 const countdown_ = () => {
     if (time === -1) return;
-    if (time === 0) {
+    if (time === 0 &&integral < 10) {
         document.getElementById("lose").style.display = "initial";
         play_btn.style.display = "none";
         document.querySelector('.menugame').style.top = '0';
         document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
+    }
+    if (time == 0 && integral >=10) {
+        const img__shield = document.querySelector(".img__shield");
+        setTimeout(() => {
+            img__shield.style.transform = "rotateY(360deg)";
+            img__shield.style.width = "50%";
+        }, 10);
+        setTimeout(() => {
+            const card = document.querySelector('.card');
+            card.click();
+            integral = 0;
+            img__shield.style.opacity = "0";
+            setTimeout(() => {
+                img__shield.style.transform = "rotateY(0deg)";
+                img__shield.style.width = "10%";
+                img__shield.style.display = "none";
+            }, 1000);
+            document.querySelector('.integral__length').style.width = `${integral * 10}%`;
+        }, 1000);
     }
     time--;
     setTimeout(countdown_, 1000);
@@ -84,7 +117,7 @@ const countdown_ = () => {
 play_btn.addEventListener("click", () => {
     if (can_click_play) {
         can_click_play = false;
-        time = 12;
+        time = 11;
         countdown_();
         document.querySelector('.menugame').style.top = '-100vh';
         setTimeout(() => {
@@ -106,16 +139,6 @@ play_btn.addEventListener("click", () => {
 
 let rotateY = 0;
 let mat = 1;
-
-// guessed
-const length = number_of_logos.length;
-function guessed_() {
-    const guessed = number_of_logos - index_array.length;
-    console.log(guessed * 100 / number_of_logos);
-    document.querySelector('.progress__length').style.width = `${guessed * 100 / number_of_logos}%`;
-}
-
-
 const card = document.querySelector('.card');
 card.addEventListener("click", async () => {
     if (can_click_play) {
@@ -133,6 +156,7 @@ card.addEventListener("click", async () => {
             }, 2550);
         }
         if (mat === 1) {
+            integral_()
             guessed_();
             time = -1;
             mat = 2;
