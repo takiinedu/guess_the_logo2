@@ -65,7 +65,7 @@ let can_click_play = false;
 setTimeout(() => {
     can_click_play = true;
     play_btn.style.cursor = "pointer";
-}, 2000);
+}, 1000);
 
 // guessed
 const length = number_of_logos.length;
