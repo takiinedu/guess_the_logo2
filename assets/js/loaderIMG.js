@@ -93,6 +93,7 @@ const countdown_ = () => {
     }
     if (time == 0 && integral >=10) {
         const img__shield = document.querySelector(".img__shield");
+        img__shield.style.display = "initial";
         setTimeout(() => {
             img__shield.style.transform = "rotateY(360deg)";
             img__shield.style.width = "50%";
