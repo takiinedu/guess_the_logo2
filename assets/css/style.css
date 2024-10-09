@@ -161,6 +161,7 @@
     border: 2px solid black;
     border-radius: 50px;
     background-color: #000;
+    display: none;
 }
 
 .countdown {
@@ -171,6 +172,7 @@
     border-radius: 20px;
     background: rgb(0, 229, 255);
     transition: 0s;
+    display: none;
 }
 
 .lines {
@@ -225,6 +227,36 @@
 
 }
 
+
+.buttons{
+    position: absolute;
+    display: flex;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: calc(50% + 270px);
+    margin: auto;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 318px;
+    height: 10px;
+    /* border-radius: 50px; */
+    border-radius: 20px;
+    justify-content: space-evenly;
+    opacity: 0;
+}
+.buttons *{
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    background-color: #FEFF42;
+}
 /* menugame */
 .menugame {
     z-index: 2;
@@ -235,7 +267,6 @@
     left: 0px;
     transition: 1s;
 }
-
 .menugame * {
     position: absolute;
     top: 50%;

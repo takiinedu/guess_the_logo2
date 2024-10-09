@@ -103,7 +103,7 @@ const countdown_ = () => {
         document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
-    time--;
+    time;
     setTimeout(countdown_, 1000);
 };
 
@@ -127,6 +127,26 @@ play_btn.addEventListener("click", () => {
             img_truoc.src = url;
             can_click_play = true;
         }, 3300);
+    }
+});
+
+
+const btn1 = document.querySelector(".btn1");
+const btn2 = document.querySelector(".btn2");
+let btn_can_click = false;
+btn1.addEventListener("click", () => {
+    if(btn_can_click){
+        btn_can_click = false;
+        can_click_play = true;
+        card.click();
+    }
+});
+btn2.addEventListener("click", () => {
+    if(btn_can_click){
+        btn_can_click = false;
+        can_click_play = true;
+        card.click();
+        guessed_();
     }
 });
 
@@ -156,6 +176,8 @@ card.addEventListener("click", async () => {
             // integral_()
             time = -1;
             mat = 2;
+            document.querySelector(".buttons").style.transition = "0.5s"
+            document.querySelector(".buttons").style.opacity = "1"
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => countdown.style.width = '100%', 100);
             setTimeout(() => countdown.style.backgroundColor = 'rgb(225, 255, 0)', 200);
@@ -171,11 +193,12 @@ card.addEventListener("click", async () => {
             updateImage(items);
             setTimeout(() => {
                 img_truoc.src = url;
-                can_click_play = true;
+                btn_can_click = true;
             }, 2000);
         } else {
             time = 11;
-            guessed_();
+            document.querySelector(".buttons").style.transition = "0.5s"
+            document.querySelector(".buttons").style.opacity = "0"
             countdown_();
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => {
