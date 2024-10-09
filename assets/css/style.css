@@ -196,7 +196,7 @@
     height: 10px;
     background-color: #333333;
     /* border-radius: 50px; */
-    border: #fca029 solid 2px;
+    border: #FEFF42 solid 2px;
     border-radius: 20px;
 }
 
@@ -210,7 +210,7 @@
 .progress__length {
     width: 0%;
     height: 100%;
-    background-color: #f0a13a;
+    background-color: #FEFF42;
     display: flex;
     align-items: center;
     position: relative;
@@ -218,22 +218,11 @@
 }
 
 .progress__length img {
-    width: 30px;
+    width: 20px;
     position: absolute;
     right: 0;
-    transform: translate(16px, 0px);
+    transform: translate(10px, -2px);
 
-}
-
-.cup {
-    position: absolute;
-    translate: -50% -50%;
-    top: 50%;
-    left: 50%;
-    width: 10%;
-    display: initial;
-    transition: 1s;
-    display: none;
 }
 
 /* menugame */
@@ -267,30 +256,30 @@
 }
 
 #play {
-    background-image: url(../img/play.png);
+    background-image: url(../img/play2.png);
     background-size: cover;
     display: initial;
 }
 
 #lose {
-    background-image: url(../img/lose.png);
+    background-image: url(../img/lose2.png);
     background-size: cover;
     display: none;
 }
 
 #win {
-    background-image: url(../img/win.png);
+    background-image: url(../img/win2.png);
     background-size: cover;
     display: none;
 }
 
 .play_again {
     box-sizing: border-box;
-    padding: 20px 10px 20px 20px;
-    background-image: url(../img/play_again.png);
+    padding: 10px 20px 20px 20px;
+    background-image: url(../img/play_again2.png);
     background-size: cover;
     position: absolute;
-    width: 50vw;
+    width: 70vw;
     height: 13vw;
     top: 50%;
     left: 50%;

@@ -46,7 +46,7 @@ const updateImage = (items) => {
     let random = Math.floor(Math.random() * (index_array.length - 1));
     let index = index_array[random];
     // console.log("random: ", random);
-    console.log("Img: ",index);
+    console.log("Img: ", index);
     const removed = index_array.splice(random, 1);
     if (index < items.length) {
         const item = items[index];
@@ -88,7 +88,7 @@ let time = 10;
 
 const countdown_ = () => {
     if (time === -1) return;
-    if (time === 0 &&guessed < 3) {
+    if (time === 0 && guessed < 3) {
         document.getElementById("lose").style.display = "initial";
         play_btn.style.display = "none";
         document.querySelector('.menugame').style.top = '0';
@@ -97,27 +97,10 @@ const countdown_ = () => {
     }
     if (guessed == 3) {
         can_click_play = false;
-        const cup = document.querySelector('.cup');
-        cup.style.display = 'initial';
-        setTimeout(() => {
-            cup.style.transition = '1.5s';
-            cup.style.transform = 'rotateY(720deg)';
-            cup.style.width = '50%';
-        }, 10);
-        setTimeout(() => {
-            cup.style.transition = '1s';
-            cup.style.opacity = '0';
-        }, 2010);
-        setTimeout(() => {
-            cup.style.opacity = '1';
-            cup.style.display = 'none';
-            cup.style.transform = 'rotateY(0deg)';
-            cup.style.width = '10%';
-            document.getElementById("win").style.display = "initial";
-            play_btn.style.display = "none";
-            document.querySelector('.menugame').style.top = '0';
-            document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        }, 2210);
+        document.getElementById("win").style.display = "initial";
+        play_btn.style.display = "none";
+        document.querySelector('.menugame').style.top = '0';
+        document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
     time--;
@@ -151,7 +134,7 @@ let rotateY = 0;
 let mat = 1;
 const card = document.querySelector('.card');
 card.addEventListener("click", async () => {
-    if(index_array.length === 0) {
+    if (index_array.length === 0) {
         time = -1;
         can_click_play = false;
     };
