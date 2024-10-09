@@ -245,6 +245,7 @@
     opacity: 0;
 }
 .buttons *{
+    cursor: pointer;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -274,7 +275,6 @@
     transform: translate(-50%, -50%);
     width: 50vw;
 }
-
 #play,
 #lose,
 #win {
