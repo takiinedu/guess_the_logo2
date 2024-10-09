@@ -96,10 +96,28 @@ const countdown_ = () => {
         return;
     }
     if (guessed == 3) {
-        document.getElementById("win").style.display = "initial";
-        play_btn.style.display = "none";
-        document.querySelector('.menugame').style.top = '0';
-        document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        can_click_play = false;
+        const cup = document.querySelector('.cup');
+        cup.style.display = 'initial';
+        setTimeout(() => {
+            cup.style.transition = '1s';
+            cup.style.transform = 'rotateY(720deg)';
+            cup.style.width = '50%';
+        }, 1000);
+        setTimeout(() => {
+            cup.style.transition = '1s';
+            cup.style.opacity = '0';
+        }, 2500);
+        setTimeout(() => {
+            cup.style.opacity = '1';
+            cup.style.display = 'none';
+            cup.style.transform = 'rotateY(0deg)';
+            cup.style.width = '10%';
+            document.getElementById("win").style.display = "initial";
+            play_btn.style.display = "none";
+            document.querySelector('.menugame').style.top = '0';
+            document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        }, 3500);
         return;
     }
     time--;
