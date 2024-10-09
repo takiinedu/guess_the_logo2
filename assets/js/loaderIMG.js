@@ -71,7 +71,7 @@ setTimeout(() => {
 const length = number_of_logos.length;
 let guessed = 0;
 function guessed_() {
-    if (guessed < 3) {
+    if (guessed < 60) {
         guessed++;
     }
     document.querySelector('.progress__length').style.width = `${guessed * 100 / 3}%`;
@@ -88,14 +88,14 @@ let time = 10;
 
 const countdown_ = () => {
     if (time === -1) return;
-    if (time === 0 &&guessed < 3) {
+    if (time === 0 &&guessed < 60) {
         document.getElementById("lose").style.display = "initial";
         play_btn.style.display = "none";
         document.querySelector('.menugame').style.top = '0';
         document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
-    if (guessed == 3) {
+    if (guessed == 60) {
         can_click_play = false;
         const cup = document.querySelector('.cup');
         cup.style.display = 'initial';
