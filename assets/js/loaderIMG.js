@@ -43,18 +43,19 @@ const fetchImages = async () => {
 };
 
 const updateImage = (items) => {
-    const random = Math.floor(Math.random() * (index_array.length + 1));
-    const index = index_array[random];
-    console.log(index);
+    let random = Math.floor(Math.random() * (index_array.length - 1));
+    let index = index_array[random];
+    // console.log("random: ", random);
+    console.log("Img: ",index);
     const removed = index_array.splice(random, 1);
     if (index < items.length) {
         const item = items[index];
         url = item.url;
         name = item.name;
+        // console.log(url);
         img_truoc.src = url;
     }
 };
-
 fetchImages().then(updateImage);
 
 const countdown = document.getElementById("countdown");
@@ -68,48 +69,38 @@ setTimeout(() => {
 
 // guessed
 const length = number_of_logos.length;
+let guessed = 0;
 function guessed_() {
-    const guessed = number_of_logos - index_array.length;
-    document.querySelector('.progress__length').style.width = `${guessed * 100 / number_of_logos}%`;
+    if (guessed < 3) {
+        guessed++;
+    }
+    document.querySelector('.progress__length').style.width = `${guessed * 100 / 3}%`;
 }
 // // integral
 let integral = 0;
-function integral_() {
-    if (integral < 10) {
-        integral++;
-    }
-    document.querySelector('.integral__length').style.width = `${integral * 10}%`;
-}
+// function integral_() {
+//     if (integral < 10) {
+//         integral++;
+//     }
+//     document.querySelector('.integral__length').style.width = `${integral * 10}%`;
+// }
 let time = 10;
 
 const countdown_ = () => {
     if (time === -1) return;
-    if (time === 0 &&integral < 10) {
+    if (time === 0 &&guessed < 3) {
         document.getElementById("lose").style.display = "initial";
         play_btn.style.display = "none";
         document.querySelector('.menugame').style.top = '0';
         document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
         return;
     }
-    if (time == 0 && integral >=10) {
-        const img__shield = document.querySelector(".img__shield");
-        img__shield.style.display = "initial";
-        setTimeout(() => {
-            img__shield.style.transform = "rotateY(360deg)";
-            img__shield.style.width = "50%";
-        }, 10);
-        setTimeout(() => {
-            const card = document.querySelector('.card');
-            card.click();
-            integral = 0;
-            img__shield.style.opacity = "0";
-            setTimeout(() => {
-                img__shield.style.transform = "rotateY(0deg)";
-                img__shield.style.width = "10%";
-                img__shield.style.display = "none";
-            }, 1000);
-            document.querySelector('.integral__length').style.width = `${integral * 10}%`;
-        }, 1000);
+    if (guessed == 3) {
+        document.getElementById("win").style.display = "initial";
+        play_btn.style.display = "none";
+        document.querySelector('.menugame').style.top = '0';
+        document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        return;
     }
     time--;
     setTimeout(countdown_, 1000);
@@ -142,6 +133,10 @@ let rotateY = 0;
 let mat = 1;
 const card = document.querySelector('.card');
 card.addEventListener("click", async () => {
+    if(index_array.length === 0) {
+        time = -1;
+        can_click_play = false;
+    };
     if (can_click_play) {
         can_click_play = false;
         rotateY = rotateY === 0 ? 180 : 360;
@@ -157,8 +152,7 @@ card.addEventListener("click", async () => {
             }, 2550);
         }
         if (mat === 1) {
-            integral_()
-            guessed_();
+            // integral_()
             time = -1;
             mat = 2;
             countdown.style.transition = 'all 0s linear';
@@ -180,6 +174,7 @@ card.addEventListener("click", async () => {
             }, 2000);
         } else {
             time = 11;
+            guessed_();
             countdown_();
             countdown.style.transition = 'all 0s linear';
             setTimeout(() => {
