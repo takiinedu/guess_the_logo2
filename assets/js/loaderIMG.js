@@ -100,14 +100,14 @@ const countdown_ = () => {
         const cup = document.querySelector('.cup');
         cup.style.display = 'initial';
         setTimeout(() => {
-            cup.style.transition = '1s';
+            cup.style.transition = '1.5s';
             cup.style.transform = 'rotateY(720deg)';
             cup.style.width = '50%';
         }, 10);
         setTimeout(() => {
             cup.style.transition = '1s';
             cup.style.opacity = '0';
-        }, 1510);
+        }, 2010);
         setTimeout(() => {
             cup.style.opacity = '1';
             cup.style.display = 'none';
@@ -117,7 +117,7 @@ const countdown_ = () => {
             play_btn.style.display = "none";
             document.querySelector('.menugame').style.top = '0';
             document.querySelector('.menugame').style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        }, 1810);
+        }, 2210);
         return;
     }
     time--;
