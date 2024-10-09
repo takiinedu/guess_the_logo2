@@ -276,7 +276,6 @@
 .play_again {
     box-sizing: border-box;
     padding: 10px 20px 20px 20px;
-    background-image: url(../img/play_again2.png);
     background-size: cover;
     position: absolute;
     width: 70vw;
@@ -284,4 +283,10 @@
     top: 50%;
     left: 50%;
     transform: translate(calc(-50% - 10px), calc(-50% + 10vw));
+}
+.play_again1{
+    background-image: url(../img/play_again.png);
+}
+.play_again2{
+    background-image: url(../img/play_again2.png);
 }
